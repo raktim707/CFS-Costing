@@ -1,0 +1,279 @@
+
+{% extends 'inventory/base.html' %}
+{% block content %}
+
+<div class="container">
+  <table class="myTable" style="width: 100%;">
+    <tr>
+      <th>RFQ No</th>
+      <th>Customer</th>
+      <th>Drawing No</th>
+      <th>Type</th>
+      <th>Date</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr>
+      <td>RFQ2</td>
+      <td>Sample Customer</td>
+      <td>23432</td>
+      <td>Demo type</td>
+      <td>16/03/2022</td>
+      <td><button>Edit</button></td>
+      <td><button>Delete</button></td>
+    </tr>
+    </table>
+    <div class="row d-flex justify-content-center mt-200"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Launch multistep Wizard </button> </div> <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add new Entry</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body">
+                    <div id="smartwizard">
+                        <ul>
+                            <li><a href="#step-1">Step 1<br /><small>General Data</small></a></li>
+                            <li><a href="#step-2">Step 2<br /><small>Material Costing</small></a></li>
+                            <li><a href="#step-3">Step 3<br /><small>Process Cost</small></a></li>
+                            <li><a href="#step-4">Step 4<br /><small>Standard Part List</small></a></li>
+                            <li><a href="#step-5">Step 5<br /><small>Final Costs</small></a></li>
+                        </ul>
+                        <div class="mt-4">
+                            <div id="step-1">
+                                <div class="row">
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="RFQ No" required> </div>
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Customer" required> </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Drawing No" required> </div>
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Type" required> </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Date" required> </div>
+                                </div>
+                            </div>
+
+                            <div id="step-2">
+                                <form id="form1" class="form-container">
+                                  <div class='row'>
+                                    <select name="Materials" class="custom-select">
+                                      <option selected>Select Material</option>
+                                      <option value="volvo">Material 1</option>
+                                      <option value="fiat">Material 2</option>
+                                      <option value="audi">Material 3</option>
+                                    </select>
+                                  </div>
+                                  <span>Dimensions</span>
+                                  <br>
+                                  <div class="row">
+                                    <div class="col-lg-4">
+                                      <b>Width, W1 (mm): </b><input type="number" name="Width1">
+                                      <b>Width, W2 (mm): </b><input type="number" name="Width2">
+                                      <b>Height, H (mm): </b><input type="number" name="Height">
+                                      <b>Dia, 01 (mm): </b><input type="number" name="Dia01">
+                                      <b>Density: </b><input type="number" name="Density">
+                                      <b>Price: </b><input type="number" name="Price">
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                      <b>Dia Inner, 02 (mm): </b><input type="number" name="DiaInner">
+
+                                      <b>Volume: </b><input type="number" name="Volume">
+                                      <b>Quantity: </b><input type="number" name="Quantity">
+                                      <b>Weight: </b><input type="number" name="Weight">
+
+                                    </div>
+                                  </div>
+
+                                   <button type="button" id="submit">Submit</button>
+                                   <button type="button" id="cancelButton" class="btn cancel">Close</button>
+                                </form>
+                                  <table style="width: 100%">
+                                    <tr>
+                                      <th>Material</th>
+                                      <th>Density</th>
+                                      <th>Volume</th>
+                                      <th>Weight</th>
+                                      <th>Quantity</th>
+                                      <th>Price</th>
+                                      <th>Edit</th>
+                                      <th>Delete</th>
+                                    </tr>
+                                    <tr>
+
+                                    </tr>
+
+                                    </table>
+
+
+                                <button type="button" id="formButton" style="margin: 20px 100px 20px 0px; align-items: right">Add New</button>
+                            </div>
+
+                            <div id="step-3" class="">
+                              <table style="width: 100%">
+                                <tr>
+                                  <th>Detail</th>
+                                  <th>Qty</th>
+                                  <th>Primary</th>
+                                  <th>Secondary</th>
+                                  <th>Total Cost</th>
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                                </tr>
+                                <tr>
+                                </tr>
+                              </table>
+
+                              <form id="form2" class="form-container">
+                                <div class='row'>
+                                  <select name="PrimaryProcess" class="custom-select">
+                                    <option selected>Primary Process</option>
+                                    <option value="fabrication">fabrication</option>
+                                    <option value="fiat">Process 2</option>
+                                    <option value="audi">Process 3</option>
+                                  </select>
+
+                                  <select name="SecondaryProcess" class="custom-select">
+                                    <option selected>Secondary Process</option>
+                                    <option value="fabrication">fabrication</option>
+                                    <option value="fiat">Process 2</option>
+                                    <option value="audi">Process 3</option>
+                                  </select>
+                                </div>
+                                <br>
+                                <div class="row">
+
+                                  <div class="col-lg-2">
+                                    <b>Quantity: </b><input type="number" name="Quantity">
+                                    <b>Primary Cost/Pc: </b><input type="number" name="PrimaryCost">
+
+                                    <b>Secondary Cost: </b><input type="number" name="SecondaryCost">
+
+                                    <b>Total Cost: </b><input type="number" name="TotalCost">
+
+                                  </div>
+                                </div>
+
+                                 <button type="button" id="submit">Submit</button>
+                                 <button type="button" id="cancelButton2" class="btn cancel">Close</button>
+                              </form>
+                              <button type="button" id="formButton2" style="margin: 20px 100px 20px 0px; align-items: right">Add New</button>
+                            </div>
+                            <div id="step-4" class="">
+                              <table style="width: 100%">
+                                <tr>
+                                  <th>Manufacturer</th>
+                                  <th>ModelNo</th>
+                                  <th>Qty</th>
+                                  <th>Unit Cost</th>
+                                  <th>Total Cost</th>
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                                </tr>
+                                <tr>
+                                </tr>
+                              </table>
+                            <button type="button" id='formButton3'>Add new</button>
+                            <div class="form-popup" id="myForm">
+                              <form class="form-container2">
+                                <h1>Search Panel</h1>
+
+                                <label for="email"><b>DWG No</b></label>
+                                <input type="text" name="DWG">
+
+                                <label for="Manufacturer"><b>Manufacturer</b></label>
+                                <input type="text" name="Manufacturer">
+
+                                <label for="Model"><b>Model No</b></label>
+                                <input type="text" name="Model">
+
+                                <button type="button" id="submit">Search</button>
+                              </form>
+
+                              <table style="width: 150%" class="form-container2">
+                                <tr>
+                                  <th>DWG No</th>
+                                  <th>REV</th>
+                                  <th>DET No</th>
+                                  <th>Manufacturer</th>
+                                  <th>Model No/Description</th>
+                                  <th>Qty</th>
+                                  <th>Price/Unit</th>
+                                  <th>Currency</th>
+                                  <th>Currency SGD</th>
+                                  <th>Price SGD</th>
+                                  <th>Total Price SGD</th>
+                                  <th>MOQ</th>
+                                  <th>Lead Time</th>
+                                  <th>Remarks</th>
+                                  <th>Update</th>
+
+                                </tr>
+
+                                <tr>
+                                </tr>
+                              </table>
+                            </div>
+                        </div>
+                        <div id="step-5" class="">
+                          <div class="row">
+                                 <div class="col-md-6">
+                                   <b>Material Cost: </b><input type="number" class="form-control" required>
+                                 </div>
+                                 <div class="col-md-6">
+                                   <b>Manufacturing Cost: </b><input type="number" class="form-control" required>
+                                 </div>
+                        </div>
+                             <div class="row mt-3">
+                                 <div class="col-md-6">
+                                   <b>Standard Part Cost: </b><input type="number" class="form-control" required>
+                                 </div>
+                                 <div class="col-md-6">
+                                   <b>Machine Assembly: </b><input type="number" class="form-control" required>
+                                 </div>
+                                 <div class="col-md-6">
+                                   <b>Load Tests: </b><input type="number" class="form-control" required>
+                                 </div>
+                                 <div class="col-md-6">
+                                   <b>Treatment: </b><input type="number" class="form-control" required>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block domready %}
+  $('#smartwizard').smartWizard({
+  selected: 0,
+  theme: 'arrows',
+  autoAdjustHeight:true,
+  transitionEffect:'fade',
+  showStepURLhash: false,
+});
+
+$("#formButton").click(function(){
+        $("#form1").toggle();
+    });
+
+$("#cancelButton").click(function(){
+        $("#form1").toggle();
+    });
+
+$("#formButton2").click(function(){
+        $("#form2").toggle();
+    });
+$("#cancelButton2").click(function(){
+        $("#form2").toggle();
+    });
+
+$("#formButton3").click(function() {
+  $("#myForm").toggle();
+})
+{% endblock %}
