@@ -1,18 +1,20 @@
 from django.contrib import admin
 from .models import *
+from import_export.admin import ImportExportMixin
 
 # Register your models here.
 
 
 @admin.register(StandardPart)
-class StandardPartAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in StandardPart._meta.get_fields()]
+class StandardPartAdmin(ImportExportMixin, admin.ModelAdmin):
+    list_display = ['dwg_no', 'model_no', 'Manufacturer',
+                    'quantity', 'price', 'total_price_sgd']
     search_fields = ['dwg_no', 'model_no', 'Manufacturer']
     list_filter = ['dwg_no', 'model_no', 'Manufacturer']
 
 
 @admin.register(Material)
-class MaterialAdmin(admin.ModelAdmin):
+class MaterialAdmin(ImportExportMixin, admin.ModelAdmin):
     list_display = ['name', 'price', 'Formula']
 
 

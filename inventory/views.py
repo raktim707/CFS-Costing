@@ -11,3 +11,8 @@ def home(request):
 @login_required(redirect_field_name='login')
 def add_entry(request):
     return render(request, 'inventory/add_entry.html')
+
+
+@login_required(redirect_field_name='login')
+def import_from_excel(request):
+    return render(request, 'inventory/import.html')

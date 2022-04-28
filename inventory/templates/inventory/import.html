@@ -1,0 +1,17 @@
+{% extends 'inventory/index.html' %}
+
+{% block content %}
+<p>Click on the "Choose File" button to upload the excel file to import data:</p>
+<br>
+<div class="container">
+<form>
+  <div class="row">
+    <div class="col">
+    <input type="file" id="myFile" name="filename">
+    <button type="button" name="button">Submit</button>
+    </div>
+  </div>
+</form>
+</div>
+
+{% endblock %}

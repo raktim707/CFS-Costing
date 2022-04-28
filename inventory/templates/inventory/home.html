@@ -1,28 +1,29 @@
 
-{% extends 'inventory/base.html' %}
+{% extends 'inventory/index.html' %}
+{% load static %}
 {% block content %}
 
 <div class="container">
-  <table class="myTable" style="width: 100%;">
-    <tr>
-      <th>RFQ No</th>
-      <th>Customer</th>
-      <th>Drawing No</th>
-      <th>Type</th>
-      <th>Date</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-    <tr>
-      <td>RFQ2</td>
-      <td>Sample Customer</td>
-      <td>23432</td>
-      <td>Demo type</td>
-      <td>16/03/2022</td>
-      <td><button>Edit</button></td>
-      <td><button>Delete</button></td>
-    </tr>
-    </table>
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="hero-container" data-aos="fade-in">
+      <h1>Welcome to CFS Costing</h1>
+    </div>
+  </section><!-- End Hero -->
+  <div class="profile">
+       <img src="{% static 'inventory/img/technical-drawings.jpg' %}" alt="" class="img-fluid rounded-circle">
+       
+       <div class="social-links mt-3 text-center">
+         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+         <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+         <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+         <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+       </div>
+     </div>
+
+
    <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

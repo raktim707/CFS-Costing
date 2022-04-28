@@ -1,8 +1,10 @@
 
-{% extends 'inventory/base.html' %}
+{% extends 'inventory/index.html' %}
 {% block content %}
 
 <div class="container">
+  <h3>List of all entries you added </h3>
+    <br>
   <table class="myTable" style="width: 100%;">
     <tr>
       <th>RFQ No</th>
@@ -23,7 +25,7 @@
       <td><button>Delete</button></td>
     </tr>
     </table>
-    <div class="row d-flex justify-content-center mt-200"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Launch multistep Wizard </button> </div> <!-- Modal -->
+    <div class="row d-flex justify-content-center mt-200"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Add New Entry </button> </div> <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -38,6 +40,7 @@
                             <li><a href="#step-3">Step 3<br /><small>Process Cost</small></a></li>
                             <li><a href="#step-4">Step 4<br /><small>Standard Part List</small></a></li>
                             <li><a href="#step-5">Step 5<br /><small>Final Costs</small></a></li>
+                            <li><a href="#step-6">REPORT (PDF)<br/></a></li>
                         </ul>
                         <div class="mt-4">
                             <div id="step-1">
@@ -161,7 +164,7 @@
                               <button type="button" id="formButton2" style="margin: 20px 100px 20px 0px; align-items: right">Add New</button>
                             </div>
                             <div id="step-4" class="">
-                              <table style="width: 100%">
+                              <table style="width: 80%">
                                 <tr>
                                   <th>Manufacturer</th>
                                   <th>ModelNo</th>
@@ -178,36 +181,39 @@
                             <div class="form-popup" id="myForm">
                               <form class="form-container2">
                                 <h1>Search Panel</h1>
-
+                                <div class="row">
+                                  <div class="col-lg-3">
                                 <label for="email"><b>DWG No</b></label>
                                 <input type="text" name="DWG">
-
+                                </div>
+                                </div>
+                                <div class="row">
+                                <div class="col-lg-3">
                                 <label for="Manufacturer"><b>Manufacturer</b></label>
                                 <input type="text" name="Manufacturer">
 
                                 <label for="Model"><b>Model No</b></label>
                                 <input type="text" name="Model">
+                                </div>
+                                </div>
 
                                 <button type="button" id="submit">Search</button>
                               </form>
 
-                              <table style="width: 150%" class="form-container2">
+                              <table style="width: 100%" class="form-container2">
                                 <tr>
                                   <th>DWG No</th>
-                                  <th>REV</th>
                                   <th>DET No</th>
                                   <th>Manufacturer</th>
-                                  <th>Model No/Description</th>
+                                  <th>Model No</th>
                                   <th>Qty</th>
                                   <th>Price/Unit</th>
                                   <th>Currency</th>
-                                  <th>Currency SGD</th>
-                                  <th>Price SGD</th>
+
                                   <th>Total Price SGD</th>
                                   <th>MOQ</th>
-                                  <th>Lead Time</th>
-                                  <th>Remarks</th>
-                                  <th>Update</th>
+                                  
+
 
                                 </tr>
 
@@ -239,6 +245,11 @@
                                    <b>Treatment: </b><input type="number" class="form-control" required>
                                  </div>
                              </div>
+                        </div>
+                        <div id="step-6" class="">
+                          <div class="row">
+                                    <div class="col-md-12"> <span>You have succesfully created a new entry. Download the report as PDF <a href="#">here</a></span> </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -276,4 +287,5 @@ $("#cancelButton2").click(function(){
 $("#formButton3").click(function() {
   $("#myForm").toggle();
 })
+
 {% endblock %}
