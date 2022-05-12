@@ -1,0 +1,95 @@
+{% extends 'inventory/index.html' %}
+{% block content %}
+
+<div class="container-fluid">
+<h2>General Data</h2>
+  <div class="card">
+    <div class="card-header">General Data</div>
+    <div class="card-body">
+      <table class="myTable" style="width: 80%">
+        <tr>
+          <th>RFQ No</th>
+          <th>Customer</th>
+          <th>Drawing No</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th><a href="{% url 'edit_rfq' rfq_entry.pk %}" class="btn btn-primary">Edit</a></th>
+        </tr>
+        <td>{{rfq_entry.rfq_no}}</td>
+        <td>{{rfq_entry.customer}} </td>
+        <td>{{rfq_entry.dwg_no}}</td>
+        <td>{{rfq_entry.type}}</td>
+        <td>{{rfq_entry.date}}</td>
+        <tr>
+          </tr>
+        </table>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">Material Cost</div>
+    <div class="card-body">
+      <table style="width: 100%">
+        <tr>
+          <th>Material</th>
+          <th>Density</th>
+          <th>Volume</th>
+          <th>Weight</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Edit</th>
+          <th>Delete</th>
+
+        </tr>
+        {% for material in materials %}
+        <tr>
+          <td>{{material}}</td>
+          <td>{{material.density}}</td>
+          <td>{{material.volume}}</td>
+          <td>{{material.weight}}</td>
+          <td>{{material.quantity}}</td>
+          <td>{{material.price}}</td>
+          <td><a href="{% url 'edit_material' material.pk %}" class="btn btn-primary">Edit</a></td>
+          <td><a href="" class="btn btn-secondary">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">Process Cost</div>
+    <div class="card-body">
+      <table style="width: 100%">
+        <tr>
+          <th>Primary</th>
+          <th>Secondary</th>
+          <th>Qty</th>
+          <th>Primary Cost</th>
+          <th>Secondary Cost</th>
+        </tr>
+        {% for entry in process %}
+        <tr>
+          <td>{{entry.primary_process}}</td>
+          <td>{{entry.secondary_process}}</td>
+          <td>{{entry.quantity}}</td>
+          <td>{{entry.primary_cost}}</td>
+          <td>{{entry.secondary_cost}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">Final Cost</div>
+    <div class="card-body">Content</div>
+    <div class="card-footer"></div>
+  </div>
+</div>
+{% endblock %}

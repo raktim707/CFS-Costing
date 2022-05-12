@@ -1,4 +1,3 @@
-
 {% extends 'inventory/index.html' %}
 {% block content %}
 
@@ -15,15 +14,17 @@
       <th>Edit</th>
       <th>Delete</th>
     </tr>
+    {% for entry in rfq_entry %}
     <tr>
-      <td>RFQ2</td>
-      <td>Sample Customer</td>
-      <td>23432</td>
-      <td>Demo type</td>
-      <td>16/03/2022</td>
-      <td><button>Edit</button></td>
+      <td>{{entry.rfq_no}}</td>
+      <td>{{entry.customer}}</td>
+      <td>{{entry.dwg_no}}</td>
+      <td>{{entry.type}}</td>
+      <td>{{entry.date}}</td>
+      <td><a href="{% url 'rfq_detail' entry.pk %}" role="button" class="btn btn-primary">Edit</a></td>
       <td><button>Delete</button></td>
     </tr>
+    {% endfor %}
     </table>
     <div class="row d-flex justify-content-center mt-200"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Add New Entry </button> </div> <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -44,55 +45,51 @@
                         </ul>
                         <div class="mt-4">
                             <div id="step-1">
+                              <form id='general-data-form' method="post">
+                                {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="RFQ No" required> </div>
-                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Customer" required> </div>
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="RFQ No" name="rfq_no" required> </div>
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Customer" name="customer" required> </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Drawing No" required> </div>
-                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Type" required> </div>
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Drawing No" name="dwg_no" required> </div>
+                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Type" name="type" required> </div>
                                 </div>
                                 <div class="row mt-3">
-                                    <div class="col-md-6"> <input type="text" class="form-control" placeholder="Date" required> </div>
+                                    <div class="col-md-6"> <input type="date" class="form-control" placeholder="Date" name="date" required> </div>
                                 </div>
+                              <input type="submit" id="submit" class="btn btn-primary" value="submit"/>
+                              </form>
+                              <div id="general-success"></div>
                             </div>
 
                             <div id="step-2">
                                 <form id="form1" class="form-container">
+                                  {% csrf_token %}
                                   <div class='row'>
-                                    <select name="Materials" class="custom-select">
-                                      <option selected>Select Material</option>
-                                      <option value="volvo">Material 1</option>
-                                      <option value="fiat">Material 2</option>
-                                      <option value="audi">Material 3</option>
-                                    </select>
+                                    <input type="text" id="rfq_no" name="rfq_no" value="" hidden>
+                                    <b>Select Material:  </b>
+                                    {{form.name}}
+
                                   </div>
                                   <span>Dimensions</span>
                                   <br>
-                                  <div class="row">
+                                  <div class="row" id="dimensions">
+                                    <div class="row">
                                     <div class="col-lg-4">
-                                      <b>Width, W1 (mm): </b><input type="number" name="Width1">
-                                      <b>Width, W2 (mm): </b><input type="number" name="Width2">
-                                      <b>Height, H (mm): </b><input type="number" name="Height">
-                                      <b>Dia, 01 (mm): </b><input type="number" name="Dia01">
-                                      <b>Density: </b><input type="number" name="Density">
-                                      <b>Price: </b><input type="number" name="Price">
+                                      <b>Density: </b><input type="number" name="density">
+                                      <b>Volume: </b> <input type="number" name="volume">
+                                      <b>Quantity: </b> <input type="number" name="quantity">
+                                      <b>Price: </b> <input type="number" name="price">
+                                    </div>
                                     </div>
 
-                                    <div class="col-lg-2">
-                                      <b>Dia Inner, 02 (mm): </b><input type="number" name="DiaInner">
-
-                                      <b>Volume: </b><input type="number" name="Volume">
-                                      <b>Quantity: </b><input type="number" name="Quantity">
-                                      <b>Weight: </b><input type="number" name="Weight">
-
-                                    </div>
                                   </div>
 
-                                   <button type="button" id="submit">Submit</button>
-                                   <button type="button" id="cancelButton" class="btn cancel">Close</button>
+
+                                  <input type="submit" id="submit" class="btn btn-primary" value="submit"/>
                                 </form>
-                                  <table style="width: 100%">
+                                  <table style="width: 100%" id="table-dimensions">
                                     <tr>
                                       <th>Material</th>
                                       <th>Density</th>
@@ -103,10 +100,6 @@
                                       <th>Edit</th>
                                       <th>Delete</th>
                                     </tr>
-                                    <tr>
-
-                                    </tr>
-
                                     </table>
 
 
@@ -114,34 +107,22 @@
                             </div>
 
                             <div id="step-3" class="">
-                              <table style="width: 100%">
-                                <tr>
-                                  <th>Detail</th>
-                                  <th>Qty</th>
-                                  <th>Primary</th>
-                                  <th>Secondary</th>
-                                  <th>Total Cost</th>
-                                  <th>Edit</th>
-                                  <th>Delete</th>
-                                </tr>
-                                <tr>
-                                </tr>
-                              </table>
 
                               <form id="form2" class="form-container">
+                                {% csrf_token %}
                                 <div class='row'>
                                   <select name="PrimaryProcess" class="custom-select">
                                     <option selected>Primary Process</option>
-                                    <option value="fabrication">fabrication</option>
-                                    <option value="fiat">Process 2</option>
-                                    <option value="audi">Process 3</option>
+                                    {% for process in primary_process %}
+                                    <option value="{{process}}">{{process}}</option>
+                                    {% endfor %}
                                   </select>
 
                                   <select name="SecondaryProcess" class="custom-select">
                                     <option selected>Secondary Process</option>
-                                    <option value="fabrication">fabrication</option>
-                                    <option value="fiat">Process 2</option>
-                                    <option value="audi">Process 3</option>
+                                    {% for process in secondary_process %}
+                                    <option value="{{process}}">{{process}}</option>
+                                    {% endfor %}
                                   </select>
                                 </div>
                                 <br>
@@ -153,14 +134,25 @@
 
                                     <b>Secondary Cost: </b><input type="number" name="SecondaryCost">
 
-                                    <b>Total Cost: </b><input type="number" name="TotalCost">
-
                                   </div>
                                 </div>
 
-                                 <button type="button" id="submit">Submit</button>
+                                 <input type="submit" id="submit" class="btn btn-primary" value="submit"/>
                                  <button type="button" id="cancelButton2" class="btn cancel">Close</button>
                               </form>
+
+                              <table style="width: 100%" id="process_cost">
+                                <tr>
+                                  <th>Qty</th>
+                                  <th>Primary</th>
+                                  <th>Secondary</th>
+                                  <th>Total Cost</th>
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                                </tr>
+                                {% include 'inventory/partial_results.html' %}
+                              </table>
+
                               <button type="button" id="formButton2" style="margin: 20px 100px 20px 0px; align-items: right">Add New</button>
                             </div>
                             <div id="step-4" class="">
@@ -179,12 +171,12 @@
                               </table>
                             <button type="button" id='formButton3'>Add new</button>
                             <div class="form-popup" id="myForm">
-                              <form class="form-container2">
+                              <form class="form-container2", id="searchForm">
                                 <h1>Search Panel</h1>
                                 <div class="row">
                                   <div class="col-lg-3">
-                                <label for="email"><b>DWG No</b></label>
-                                <input type="text" name="DWG">
+                                <label for="DWG"><b>DWG No</b></label>
+                                <input type="number" name="DWG">
                                 </div>
                                 </div>
                                 <div class="row">
@@ -197,10 +189,10 @@
                                 </div>
                                 </div>
 
-                                <button type="button" id="submit">Search</button>
+                                <input type="submit" id="submit" class="btn btn-primary" value="search"/>
                               </form>
 
-                              <table style="width: 100%" class="form-container2">
+                              <table style="width: 100%" class="form-container2" id="part_list_result">
                                 <tr>
                                   <th>DWG No</th>
                                   <th>DET No</th>
@@ -209,16 +201,9 @@
                                   <th>Qty</th>
                                   <th>Price/Unit</th>
                                   <th>Currency</th>
-
-                                  <th>Total Price SGD</th>
-                                  <th>MOQ</th>
-                                  
-
-
+                                  <th>Price SGD</th>
                                 </tr>
 
-                                <tr>
-                                </tr>
                               </table>
                             </div>
                         </div>
@@ -261,8 +246,9 @@
 {% endblock %}
 
 {% block domready %}
+
   $('#smartwizard').smartWizard({
-  selected: 0,
+  selected: 3,
   theme: 'arrows',
   autoAdjustHeight:true,
   transitionEffect:'fade',
@@ -288,4 +274,115 @@ $("#formButton3").click(function() {
   $("#myForm").toggle();
 })
 
+$("#general-data-form").submit(function (e) {
+  e.preventDefault();
+  var serializeData = $(this).serialize();
+  console.log(serializeData);
+
+  $.ajax({
+    type: 'POST',
+    url: "{% url 'general_data' %}",
+    data: serializeData,
+    success: function (response) {
+        console.log(response);
+        rfq = response.rfq_no;
+        Cookies.set('rfq_no', rfq);
+        console.log(response.customer, response.rfq_no, response.dwg_no)
+        console.log("RFQ will be passed ", rfq)
+        $("#submit").hide();
+        $("#general-success").text("Success! Click Next");
+        $(".sw-btn-next").click();
+        $("#rfq_no").val(rfq);
+    },
+
+    error: function(response) {
+      console.log("sddfs")
+    }
+  });
+});
+
+
+
+$("#id_name").change(function (){
+  serializeData = $(this).serialize();
+  $.ajax({
+    type: 'GET',
+    url: "{% url 'choose_material' %}",
+    data: serializeData,
+    success: function(response){
+      console.log("got it: ", response.my_data);
+      my_fields = response.my_data
+      for (let i=0; i < my_fields.length; i++) {
+        $("#dimensions").append(`<div class="col-lg-2"><b>${my_fields[i]}: </b> <input type="number" name="${my_fields[i]}"></div>`)
+      }
+    },
+
+    error: function(response){
+      console.log("adadasasdsa");
+    }
+  });
+});
+
+
+$("#form1").submit(function(e) {
+  e.preventDefault();
+  var serializeData = $(this).serialize();
+  $.ajax({
+    type: 'POST',
+    url: "{% url 'material_cost' %}",
+    data: serializeData,
+    success: function (response) {
+      console.log(response);
+      $("#form1").hide();
+      $("#table-dimensions").append(`<tr><td>${response.name}</td> <td>${response.density}</td> <td>${response.volume}</td> <td>${response.weight}</td> <td>${response.quantity}</td> <td>${response.price}</td><td>edit</td><td>delete</td></tr>`)
+    },
+
+    error: function(response) {
+      console.log("error!!! error");
+    }
+
+  });
+});
+
+$("#form2").submit(function(e) {
+  e.preventDefault();
+  rfq_no = Cookies.get('rfq_no');
+  var serializeData = $(this).serializeArray();
+  serializeData.push({name: 'rfq_no', value: rfq_no});
+  console.log(serializeData);
+  Cookies.remove('rfq_no');
+  $.ajax({
+    type: 'POST',
+    url: "{% url 'process_cost' %}",
+    data: serializeData,
+    success: function (response) {
+      console.log(response);
+      $("#process_cost").append(`<tr><td>${response.Quantity}</td><td>${response.PrimaryProcess}</td><td>${response.SecondaryProcess}</td><td>${response.total_cost}</td><td>edit</td><td>delete</td></tr>`);
+      $("#form2").hide();
+
+    },
+
+    error: function (response) {
+      console.log("ERROR ");
+    }
+  });
+});
+
+$("#searchForm").submit(function(e) {
+  e.preventDefault();
+  var serializeData = $(this).serialize();
+  console.log(serializeData);
+  $.ajax({
+    type: 'GET',
+    url: "{% url 'search_parts' %}",
+    data: serializeData,
+    success: function (response){
+        console.log(response);
+        $("#part_list_result").html(response['html_from_view']);
+    },
+    error: function(response){
+      console.log(response);
+    }
+  });
+});
 {% endblock %}

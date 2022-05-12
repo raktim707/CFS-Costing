@@ -1,0 +1,30 @@
+
+{% extends 'inventory/index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-between text-left">
+  <h3>Secondary Processes</h3>
+  <button><i class="fas fa-fw fa fa-plus" style="left: auto;"></i>Add New</button>
+</div>
+    <br>
+  <table class="myTable" style="width: 100%;">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr>
+      <td>Dying</td>
+      <td>Secondary</td>
+      <td>
+        <button><i class="fas fa-fw fa-pen"></i></button></td>
+      <td><button><i class="fas fa-fw fa fa-times"></i></button></td>
+    </tr>
+    </table>
+
+</div>
+
+{% endblock %}

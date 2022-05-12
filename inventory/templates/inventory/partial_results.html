@@ -1,0 +1,11 @@
+{% if parts %}
+<ul>
+{% for part in parts %}
+<li>{{part['fields']}}</li>
+<li>{{part}}</li>
+
+{% endfor %}
+{% else %}
+<p> No result found </p>
+</ul>
+{% endif %}

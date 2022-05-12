@@ -1,0 +1,29 @@
+{% extends 'inventory/index.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-fluid">
+<h2> Edit Material Data</h2>
+
+<form class="" action="" method='POST'>
+  {% csrf_token %}
+
+    <div class="row">
+    <div class="col-md-3">
+      <b>Density: </b><input type="number" name="density" value="{{material_cost.density}}">
+      <b>Volume: </b> <input type="number" name="volume" value="{{material_cost.volume}}">
+      <b>Quantity: </b> <input type="number" name="quantity" value="{{material_cost.quantity}}">
+      <b>Price: </b> <input type="number" name="price" value="{{material_cost.price}}">
+    </div>
+    </div>
+    <div class="row mt-3">
+    {% for field, val in active_fields %}
+    <div class="col-md-3">
+      <b>{{field}}: </b> <input type="number" name="{{field}}" value="{{val}}">
+    </div>
+    {% endfor %}
+    </div>
+  <input type="submit" value="Update">
+</form>
+
+</div>
+{% endblock %}

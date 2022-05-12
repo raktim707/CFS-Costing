@@ -1,0 +1,214 @@
+{% extends 'inventory/index.html' %}
+
+{% block content %}
+<style>
+  .form-holder {
+      display: -webkit-flex;
+      display: -webkit-box;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+
+  }
+
+  .form-holder .form-content {
+      position: relative;
+      text-align: center;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-align-items: center;
+      align-items: center;
+      padding: 20px 40px 40px 30px;
+  }
+
+  .form-content .form-items {
+      border: 3px solid rgba(255, 255, 255, 0.158);
+      padding: 16px;
+      display: inline-block;
+      width: 100%;
+      min-width: 840px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      text-align: left;
+      -webkit-transition: all 0.4s ease;
+      transition: all 0.4s ease;
+  }
+
+  .form-content h3 {
+      color: #fff;
+      text-align: left;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 5px;
+  }
+
+  .form-content h3.form-title {
+      margin-bottom: 30px;
+  }
+
+  .form-content p {
+      color: #fff;
+      text-align: left;
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 20px;
+      margin-bottom: 30px;
+  }
+
+  .form-content textarea {
+      position: static !important;
+      width: 130%;
+      padding: 8px 20px;
+      border-radius: 6px;
+      text-align: left;
+      background-color: rgb(110, 104, 104);
+      border: 0;
+      font-size: 15px;
+      font-weight: 300;
+      color: #8D8D8D;
+      outline: none;
+      resize: none;
+      height: 120px;
+      -webkit-transition: none;
+      transition: none;
+      margin-bottom: 14px;
+  }
+  .form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #c3c7d1;
+    color: #000000;
+}
+
+.mv-up{
+    margin-top: -9px !important;
+    margin-bottom: 8px !important;
+}
+
+  .form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+      color: rgb(37, 60, 134);
+  }
+
+  .invalid-feedback{
+      color: #ff606e;
+  }
+
+  .valid-feedback{
+     color: #2acc80;
+  }
+
+</style>
+<h4>Select the material to enable/disable preferred fields and set custom Formula</h4>
+<div class="form-body">
+  <div class='row'>
+  <div class="form-holder">
+  <div class="form-content">
+    <div class="form-items">
+<form method="post" class="form-card">
+
+   {% csrf_token %}
+ {{ form.non_field_errors }}
+ <div class="fieldWrapper">
+ {{form.name.errors}}
+ <label for="{{ form.name.id_for_label }}">Choose Material:</label>
+    {{ form.name }}
+</div>
+<span>Mark the fields that you want to enable for the material</span>
+
+<div class="row justify-content-between text-left">
+
+<div class="form-group col-sm-4 flex-column d-flex">
+<div class="fieldWrapper">
+{{form.width1}}
+<label class="form-control-label px-3" for="{{form.width1.id_for_label}}">Width 1</label>
+</div>
+</div>
+<div class="form-group col-sm-4 flex-column d-flex">
+<div class="fieldWrapper">
+    {{form.width2}}
+    <label class="form-control-label px-3" for="{{form.width2.id_for_label}}">Width 2</label>
+</div>
+</div>
+
+<div class="form-group col-sm-4 flex-column d-flex">
+<div class="fieldWrapper">
+  {{form.height}}
+    <label class="form-control-label px-3" for="{{form.height.id_for_label}}">Height</label>
+</div>
+</div>
+</div>
+
+<div class="row justify-content-between text-left">
+  <div class="form-group col-sm-4 flex-column d-flex">
+    <div class="fieldWrapper">
+  {{form.diameter1}}
+    <label class="form-control-label px-3" for="{{form.diameter1.id_for_label}}">Diameter 1</label>
+    </div>
+  </div>
+  <div class="form-group col-sm-4 flex-column d-flex">
+  <div class="fieldWrapper">
+    {{form.diameter2}}
+      <label class="form-control-label px-3" for="{{form.diameter2.id_for_label}}">Diameter 2</label>
+  </div>
+  </div>
+
+  <div class="form-group col-sm-4 flex-column d-flex">
+  <div class="fieldWrapper">
+    {{form.volume}}
+      <label class="form-control-label px-3" for="{{form.volume.id_for_label}}">Volume</label>
+  </div>
+  </div>
+</div>
+
+<div class="row justify-content-between text-left">
+
+  <div class="form-group col-sm-4 flex-column d-flex">
+  <div class="fieldWrapper">
+    {{form.weight}}
+      <label class="form-control-label px-3" for="{{form.weight.id_for_label}}">weight</label>
+  </div>
+  </div>
+
+  <div class="form-group col-sm-4 flex-column d-flex">
+  <div class="fieldWrapper">
+    {{form.density}}
+      <label class="form-control-label" for="{{form.density.id_for_label}}">Density</label>
+  </div>
+  </div>
+
+  <div class="form-group col-sm-4 flex-column d-flex">
+  <div class="fieldWrapper">
+    {{form.price}}
+      <label class="form-control-label" for="{{form.price.id_for_label}}">Price</label>
+  </div>
+  </div>
+</div>
+
+<div class="row justify-content-between text-left">
+
+  <div class="form-group col-sm-4 flex-column d-flex">
+  <div class="fieldWrapper">
+    {{form.Formula}}
+      <label class="form-control-label" for="{{form.Formula.id_for_label}}">Enter Custom Formula</label>
+  </div>
+  </div>
+
+</div>
+
+ <p style="text-align: right;"><input type="submit" value="Apply"></p>
+</form>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+
+{% extends 'inventory/index.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div class="row justify-content-between text-left">
+  <h3>All users</h3>
+  <a href="{% url 'add_user' %}" class="btn btn-primary"><i class="fas fa-fw fa fa-plus" style="left: auto;"></i>Add New</a>
+</div>
+    <br>
+  <table class="myTable" style="width: 100%;">
+    <tr>
+      <th>Username</th>
+      <th>Status</th>
+      <th>Active</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr>
+      <td>Raktim</td>
+      <td>Admin</td>
+      <td>Yes</td>
+      <td>
+        <button><i class="fas fa-fw fa-pen"></i></button></td>
+      <td><button><i class="fas fa-fw fa-times"></i></button></td>
+    </tr>
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'inventory/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid">
+<h2> Edit General Data </h2>
+<div class="col-lg">
+<form class="form-inline" action="" method='POST'>
+  {% csrf_token %}
+  <div class="form-group">
+  {{form|crispy}}
+  </div>
+  <input type="submit" value="Update">
+</form>
+</div>
+</div>
+{% endblock %}

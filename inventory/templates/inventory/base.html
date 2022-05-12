@@ -16,8 +16,11 @@
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="">CFS Costing</a>
         {% if request.user.is_authenticated %}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Add New Entry </button>
+        <span><a href="{% url 'home' %}"> Dashboard </a></span>
         <a href="{% url 'logout' %}" style="padding-left: 63em;">Logout</a>
+
+        {% else %}
+          <a href="{% url 'login' %}" style="padding-left: 70em; color: green; font-weight: bolder">Sign In</a>
         {% endif %}
       </nav>
       <br>
